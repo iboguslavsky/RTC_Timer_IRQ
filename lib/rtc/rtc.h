@@ -1,8 +1,8 @@
-#include <avr/io.h>
 #include <avr/interrupt.h>
-#include <stdint.h>
+#include <avr/io.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
