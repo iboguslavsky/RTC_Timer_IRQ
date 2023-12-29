@@ -19,7 +19,7 @@ Upon timer expiration, the timer will invoke a user-provided callback function. 
 ```
 Timer::init(fastCLock, trueIRQ, Serial);
 ```
-The first boolean parameter selects fast or slow clock. The second one provides selection of "true Interrupt" use (ie, avoids using the main loop() in an Arduino app. This is preferred when some blocking code is expected to be executed as part of loop()). The preferred method is set trueIRQ to __false__, reuiring the use of _ _Timer::timerLoop()_ _ funtion insode the main loop() to **poll* for expiring timers, which is more lightweight and aligns with the polling nature of Arduino's loop() function.
+The first boolean parameter selects fast or slow clock. The second one provides selection of "true interrupt" usage pattern, by avoiding using the main loop() in an Arduino app alltogether. This is acceptable when some blocking code is expected to be executed as part of main loop(). The preferred method is set trueIRQ to __false__, reuiring the use of _ _Timer::timerLoop()_ _ funtion insode the main loop() to **poll* for expiring timers, which is more lightweight and aligns with the polling nature of Arduino's loop() function.
 
 The last parameter allows for passing of Serial (or any other) stream parameter to help with debugging of the library by allowing Serial.print() funtionality to be used inside library functions.
 
