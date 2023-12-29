@@ -12,12 +12,21 @@ This library makes use of the newly-available on Dx series [RTC peripheral](http
 The library allows selection of fast (32KHz) and slow (1.024Khz) clock to be used. When longer timer period is needed, use slow clock option (up to ~64s timer period). When more accuracy is required, use the fast clock (~30ms timer resolution).
 The library provides support for continuos (auto-reloading) and one-shot timers. 
 
-Upon timer expiration, the timer will invoke a user-provided callback function, there is an optionof providing a specific callback function with an individual input parameter of arbitrary type. See code samples for examples of the input parameter use, including how to dereference the parameter.
+Upon timer expiration, the timer will invoke a user-provided callback function. There is an optional input parameter of arbitrary type, that can be provided to the callback. See code examples for the input parameter use, including how to dereference the input parameter.
 
 ## Basic usage
 ### Initialize Timer subsystem
+```
+Timer::init(fastCLock, trueIRQ, Serial);
+```
+The first boolean parameter selects fast or slow clock. The second one provides selection of "true Interrupt" use (ie, avoids using the main loop() in an Arduino app. This is preferred when some blocking code is expected to be executed as part of loop()). The preferred method is set trueIRQ to __false__, reuiring the use of _ _Timer::timerLoop()_ _ funtion insode the main loop() to **poll* for expiring timers, which is more lightweight and aligns with the polling nature of Arduino's loop() function.
+
+The last parameter allows for passing of Serial (or any other) stream parameter to help with debugging of the library by allowing Serial.print() funtionality to be used inside library functions.
+
 ### Declare individual timer instances
-### Start ttimer
+
+### Start timer
+
 ### Stop timer
 
 ## Limitations
