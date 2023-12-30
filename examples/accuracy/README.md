@@ -1,1 +1,1 @@
-[5ms period timer accuracy](5ms.png)
+![5ms period timer accuracy](5ms.png)
