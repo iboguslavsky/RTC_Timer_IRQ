@@ -1,10 +1,10 @@
 # Interrupts-based Timer library for AVR Dx product family of MCUs
-Unlinke other common timer libraries, this one doesn't have a limitation on the number of timers supported. The number of available timers is only limited by the amount of the available RAM. See [100_Timers](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md) for an exmple running on 2Kb RAM MCU.
+Unlinke other common timer libraries, this one doesn't have a limitation on the number of available timers. The number of timers is only limited by the amount of the available RAM. See [100_Timers](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md) for an example running on 2Kb RAM MCU.
 
-Since timers are hardware-based and interrupt-driven, it allows for accurate triggering of timers - independently of any blocking code in the app.
+Since timers are hardware-based and interrupt-driven, it allows for accurate triggering of timers - independently of any blocking code in the app. See [accuracy](https://github.com/iboguslavsky/RTC_Timer_IRQ/tree/main/examples/accuracy) example.
 
 ## Features
-This library makes use of the newly-available on Dx series [RTC peripheral](https://onlinedocs.microchip.com/oxy/GUID-8CE4FE13-3B15-43FE-A86C-FC8177202CD3-en-US-6/GUID-5EFC8FBF-DD40-43CB-898A-D0EAD386D90D.html). This allows for:
+This library makes use of the [RTC peripheral](https://onlinedocs.microchip.com/oxy/GUID-8CE4FE13-3B15-43FE-A86C-FC8177202CD3-en-US-6/GUID-5EFC8FBF-DD40-43CB-898A-D0EAD386D90D.html) available on newer parts, Like Dx series and series 1 AVR parts. This allows for:
 - Avoiding the use of more commonly used TCA/TCB/TCD timers
 - Exceptionally low power consumption (~800 nA when running from internal 32KHz oscillator)
 - 1ms accuracy (when clocked by 1.024KHz clock derived from from OSC32K)
@@ -29,7 +29,7 @@ Timer latency(period, isSingleShot, callback);
 ```
 Period is expressed in a number of RTC counter's "ticks". For a **slow** clock, it's roughly 1ms (1,000/1,024 ms, to be precise). For a **fast** clock, it is ~30ms (1 / 32678 s). Keep in mind that the period value is rounded up to the nearest 5 ticks (see [Limitations](https://github.com/iboguslavsky/RTC_Timer_IRQ/blob/main/README.md#limitations) section below)
 
-Timer class can be instantiated statically (as a global variable, for example) - or it could be allocated dynamically during runtime using **new** ([100_Timers](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md)). The advantage of having instance data pre-allocated during compile time is more predictability around memory consumption.
+Timer class can be instantiated [statically](https://github.com/iboguslavsky/RTC_Timer_IRQ/tree/main/examples/one_shot) (as a global variable, for example) - or it could be allocated dynamically during runtime using [**new**](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md). The advantage of having instance data pre-allocated during compile time is more predictability around memory consumption.
 
 You can pass an arbitrary data structure to the callback function. See [100_Timers](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md) for sample implementation.
 
