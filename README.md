@@ -4,7 +4,7 @@ Unlinke other common timer libraries, this one doesn't have a limitation on the 
 Since timers are hardware-based and interrupt-driven, it allows for accurate triggering of timers - independently of any blocking code in the app. See [accuracy](https://github.com/iboguslavsky/RTC_Timer_IRQ/tree/main/examples/accuracy) example.
 
 ## Features
-This library makes use of the [RTC peripheral](https://onlinedocs.microchip.com/oxy/GUID-8CE4FE13-3B15-43FE-A86C-FC8177202CD3-en-US-6/GUID-5EFC8FBF-DD40-43CB-898A-D0EAD386D90D.html) available on newer parts, Like Dx series and  tinyAVR® 1-series and 0-seies. This allows for:
+This library makes use of the [RTC peripheral](https://onlinedocs.microchip.com/oxy/GUID-8CE4FE13-3B15-43FE-A86C-FC8177202CD3-en-US-6/GUID-5EFC8FBF-DD40-43CB-898A-D0EAD386D90D.html) available on newer parts, Like DA/DB/DD series, as well as tinyAVR® 1-series and 0-series parts. This allows for:
 - Preserving commonly used TCA/TCB/TCD timers for other tasks
 - Exceptionally low power consumption (~800 nA when running from internal 32KHz oscillator)
 - 1ms accuracy (when clocked by 1.024KHz clock derived from from OSC32K)
