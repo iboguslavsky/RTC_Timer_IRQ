@@ -50,7 +50,7 @@ For  Arduino "native" (ie, non-true IRQ timers) handling, do not forget to inclu
 ```
 Timer::timerLoop()
 ```
-This will check for expired timers and run corresponsding callback functions defined during timer's instantiation.
+This will check for expired timers and run corresponsding callback functions defined during timer's instantiation. Keep in mind that if loop() gets blocked, your timer will be inaccurate. If you need to keep the accuracy, use *trueIRQ* mode in _Timer::init()_.
 
 ## Limitations
 The library is using CMP mode of the RTC timer to dive individual timers. Snce RTC domain clock is asynchronous to the main clock, it takes up to 3 RTC lcock cycles to syncronize CMP register changes. BEcause of this limitation, timer granularity is forced in code to a minimu of 5 timer ticks. WHen slow clock timer is used, this results in ~5ms tier granularity. The library will round up the tiimer period to the nearest 5ms boundary (ie, setting timer to 22ms period will result in a 25ms period).
