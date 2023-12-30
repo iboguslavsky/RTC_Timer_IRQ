@@ -21,19 +21,38 @@ Timer::init(fastCLock, trueIRQ, Serial);
 ```
 The first boolean parameter selects fast or slow clock. The second one provides selection of "true interrupt" usage pattern, by avoiding using the main loop() in an Arduino app alltogether. This is acceptable when some blocking code is expected to be executed as part of main loop(). The preferred method though is to set trueIRQ to __false__, requiring the use of _ _Timer::timerLoop()_ _ funtion inside the main loop() to **poll* for expiring timers, which is more lightweight and aligns with the polling nature of Arduino's loop() function.
 
-The last parameter allows for passing of Serial (or any other stream) to help with debugging of the library by allowing Serial.print() funtionality inside library functions.
+The last parameter allows for passing of Serial (or any other stream) to help with debugging of the library by enabling Serial.print() funtionality inside library functions.
 
 ### Instantiate Timer class
 ```
 Timer latency(period, isSingleShot, callback);
 ```
-Period is expressed in a number of RTC counter's "ticks". FOr a **slow** clock, it's roughy 1ms (1,000/1,024 ms, to be precise). For **fast** clock, it is ~30ms (1 / 32678 s). Keep in mind that the period sessting is rounded up to the nearest 5 ticks (see _ _Limitations_ _ section below)
+Period is expressed in a number of RTC counter's "ticks". FOr a **slow** clock, it's roughy 1ms (1,000/1,024 ms, to be precise). For **fast** clock, it is ~30ms (1 / 32678 s). Keep in mind that the period sessting is rounded up to the nearest 5 ticks (see [Limitations](https://github.com/iboguslavsky/RTC_Timer_IRQ/blob/main/README.md#limitations) section below)
 
-### Declare individual timer instances
+Timer class can be instantiated statically (as a global variable, for example) - or it could be allocated dynamically during runtime using **new** (see [100_Timers](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md example). The advantage of having instance data pre-allocated during compile time is more predictability around memory consumption.
+
+You can pass an arbitrary data structure to the callback function. See [100_Timers](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md for sample implementation.
 
 ### Start timer
+The timer, once allocated, remains paused until started. To start a timer, or to restart a paused timer, simply do:
+```
+latencyTimer.startTimer();
+```
 
 ### Stop timer
+Any non-single shot timer can be paused. Note: the timer will always exeute remaing run before being stopped. To stop (pause) a timer, run:
+```
+latencyTimer.stopTimer();
+```
+
+### How to handle timer polling
+For  Arduino "native" (ie, non-true IRQ timers) handling, do not forget to include this in the loop() funtion (anywhere):
+```
+Timer::timerLoop()
+```
+This will check for timer expiration and run corresponsding callback functions definerd during timer's instantiation.
 
 ## Limitations
 The library is using CMP mode of the RTC timer to dive individual timers. Snce RTC domain clock is asynchronous to the main clock, it takes up to 3 RTC lcock cycles to syncronize CMP register changes. BEcause of this limitation, timer granularity is forced in code to a minimu of 5 timer ticks. WHen slow clock timer is used, this results in ~5ms tier granularity. The library will round up the tiimer period to the nearest 5ms boundary (ie, setting timer to 22ms period will result in a 25ms period).
+
+For that same reason, when starting timers in a rapid succession, allow for 5 ticks (5ms for slow clock) of delay between each timerStart() run.
