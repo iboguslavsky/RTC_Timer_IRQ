@@ -4,15 +4,15 @@ Unlinke other common timer libraries, this one doesn't have a limitation on the 
 Since timers are hardware-based and interrupt-driven, it allows for accurate triggering of timers - independently of any blocking code in the app. See [accuracy](https://github.com/iboguslavsky/RTC_Timer_IRQ/tree/main/examples/accuracy) example.
 
 ## Features
-This library makes use of the [RTC peripheral](https://onlinedocs.microchip.com/oxy/GUID-8CE4FE13-3B15-43FE-A86C-FC8177202CD3-en-US-6/GUID-5EFC8FBF-DD40-43CB-898A-D0EAD386D90D.html) available on newer parts, Like Dx series and series 1 AVR parts. This allows for:
-- Avoiding the use of more commonly used TCA/TCB/TCD timers
+This library makes use of the [RTC peripheral](https://onlinedocs.microchip.com/oxy/GUID-8CE4FE13-3B15-43FE-A86C-FC8177202CD3-en-US-6/GUID-5EFC8FBF-DD40-43CB-898A-D0EAD386D90D.html) available on newer parts, Like Dx series and  tinyAVR® 1-series and 0-seies. This allows for:
+- Preserving commonly used TCA/TCB/TCD timers for other tasks
 - Exceptionally low power consumption (~800 nA when running from internal 32KHz oscillator)
 - 1ms accuracy (when clocked by 1.024KHz clock derived from from OSC32K)
 
-The library allows selection of fast (32KHz) and slow (1.024Khz) clock to be used. When longer timer period is needed, use slow clock option (up to ~64s timer period). When more accuracy is required, use the fast clock (~30ms timer resolution).
+The library allows for selection of fast (32KHz) and slow (1.024Khz) clock. When longer timer periods are needed, use slow clock option (up to ~64s timer period). When more accuracy is required, use the fast clock (~30ms timer resolution).
 The library provides support for continuos (auto-reloading) and one-shot timers. 
 
-Upon timer expiration, the timer will invoke a user-provided callback function. There is an optional input parameter of arbitrary type, that can be provided to the callback. See code examples for the input parameter use, including how to dereference the input parameter.
+Upon the expiration, the timer will invoke a user-provided callback function. There is an optional input parameter of arbitrary type, that can be provided to the callback. See code examples for the input parameter use, including how to dereference the input parameter.
 
 ## Basic usage
 ### Initialize RTC Counter
