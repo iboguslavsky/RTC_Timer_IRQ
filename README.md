@@ -15,13 +15,19 @@ The library provides support for continuos (auto-reloading) and one-shot timers.
 Upon timer expiration, the timer will invoke a user-provided callback function. There is an optional input parameter of arbitrary type, that can be provided to the callback. See code examples for the input parameter use, including how to dereference the input parameter.
 
 ## Basic usage
-### Initialize Timer subsystem
+### Initialize RTC Counter
 ```
 Timer::init(fastCLock, trueIRQ, Serial);
 ```
-The first boolean parameter selects fast or slow clock. The second one provides selection of "true interrupt" usage pattern, by avoiding using the main loop() in an Arduino app alltogether. This is acceptable when some blocking code is expected to be executed as part of main loop(). The preferred method is set trueIRQ to __false__, reuiring the use of _ _Timer::timerLoop()_ _ funtion insode the main loop() to **poll* for expiring timers, which is more lightweight and aligns with the polling nature of Arduino's loop() function.
+The first boolean parameter selects fast or slow clock. The second one provides selection of "true interrupt" usage pattern, by avoiding using the main loop() in an Arduino app alltogether. This is acceptable when some blocking code is expected to be executed as part of main loop(). The preferred method though is to set trueIRQ to __false__, requiring the use of _ _Timer::timerLoop()_ _ funtion inside the main loop() to **poll* for expiring timers, which is more lightweight and aligns with the polling nature of Arduino's loop() function.
 
-The last parameter allows for passing of Serial (or any other) stream parameter to help with debugging of the library by allowing Serial.print() funtionality to be used inside library functions.
+The last parameter allows for passing of Serial (or any other stream) to help with debugging of the library by allowing Serial.print() funtionality inside library functions.
+
+### Instantiate Timer class
+```
+Timer latency(period, isSingleShot, callback);
+```
+Period is expressed in a number of RTC counter's "ticks". FOr a **slow** clock, it's roughy 1ms (1,000/1,024 ms, to be precise). For **fast** clock, it is ~30ms (1 / 32678 s). Keep in mind that the period sessting is rounded up to the nearest 5 ticks (see _ _Limitations_ _ section below)
 
 ### Declare individual timer instances
 
