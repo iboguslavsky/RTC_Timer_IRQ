@@ -19,7 +19,7 @@ Upon timer expiration, the timer will invoke a user-provided callback function. 
 ```
 Timer::init(fastCLock, trueIRQ, Serial);
 ```
-The first boolean parameter selects fast or slow clock. The second one provides selection of "true interrupt" usage pattern, by avoiding using the main loop() in an Arduino app alltogether. This is acceptable when some blocking code is expected to be executed as part of main loop(). The preferred method though is to set trueIRQ to __false__, requiring the use of _ _Timer::timerLoop()_ _ funtion inside the main loop() to **poll* for expiring timers, which is more lightweight and aligns with the polling nature of Arduino's loop() function.
+The first boolean parameter selects fast or slow clock. The second one provides selection of "true interrupt" usage pattern, by avoiding using the main loop() in an Arduino app alltogether. This is acceptable when some blocking code is expected to be executed as part of main loop(). The preferred method though is to set trueIRQ to __false__, requiring the use of _Timer::timerLoop()_ funtion inside the main loop() to **poll* for expiring timers, which is more lightweight and aligns with the polling nature of Arduino's loop() function.
 
 The last parameter allows for passing of Serial (or any other stream) to help with debugging of the library by enabling Serial.print() funtionality inside library functions.
 
@@ -40,7 +40,7 @@ latencyTimer.startTimer();
 ```
 
 ### Stop timer
-Any non-single shot timer can be paused. _ _Note_ _: the timer will always execute its last run before being stopped. To stop (pause) a timer, run:
+Any non-single shot timer can be paused. _Note_: the timer will always execute its last run before being stopped. To stop (pause) a timer, run:
 ```
 latencyTimer.stopTimer();
 ```
