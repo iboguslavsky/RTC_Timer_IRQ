@@ -44,7 +44,7 @@ Use **slow** clock for longer time periods (up to 64s). Use **fast** clock for b
 ```
 Timer::init(fastCLock, trueIRQ, Serial);
 ```
-The first boolean parameter selects fast or slow clock. The second one provides selection of "true interrupt" usage pattern, by avoiding using the main loop() in an Arduino app alltogether. This is acceptable when some blocking code is expected to be executed as part of main loop(). The preferred method though is to set trueIRQ to __false__, requiring the use of _Timer::timerLoop()_ funtion inside the main loop() to **poll* for expiring timers, which is more lightweight and aligns with the polling nature of Arduino's loop() function.
+The first boolean parameter selects fast or slow clock. The second one provides an option of "true interrupt" usage pattern, which avoids using the main loop() of an Arduino app alltogether. This is acceptable when some blocking code is expected to be executed as part of main loop(). The preferred method though is to set trueIRQ to __false__, requiring the use of _Timer::timerLoop()_ funtion inside the main loop() to **poll* for expiring timers, which is more lightweight and aligns with the polling nature of Arduino's loop() function.
 
 The last parameter allows for passing of Serial (or any other stream) to help with debugging of the library by enabling Serial.print() funtionality inside library functions.
 
