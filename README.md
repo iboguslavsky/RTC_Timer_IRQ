@@ -1,6 +1,6 @@
 # rtctimer
 
-## Yet Another Timer Library?
+## Yet Another Arduino Timer Library?
 * Uses hardware RTC counter as timing source
 * Interrupt driven, accuracy not affected by blocking code
 * "Unlimited" number of timers (limited by available RAM only) - [100 simultaneous timers](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md) example
