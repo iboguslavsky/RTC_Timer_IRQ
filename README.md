@@ -7,6 +7,24 @@
 
 ## Sample use
 ```
+// Callback
+timer_cb_t oneSecondTimer(void* data) {
+  Serial.println("Fired!");
+}
+
+Timer timer(1000, false, oneSecondTimer);
+
+void setup() {
+  Serial.begin(115200);
+
+  // Slow clock / use loop()
+  Timer::init(false, false, Serial);
+  timer.timerStart();
+}
+
+void loop() {
+  Timer::timerLoop();
+}
 ```
 
 ## Features
@@ -14,14 +32,13 @@ This library makes use of the [RTC peripheral](https://onlinedocs.microchip.com/
 
 * Preserves other commonly used hardware timers (TCA/TCB/TCD) for other tasks
 * Adds very little to power consumption (~800 nA when running from internal 32KHz oscillator)
-* 1ms accuracy (when clocked by 1.024KHz clock derived from from OSC32K)
-* 64s max timer period (**slow** clock)
-* Supports one-shot - and ccontinuos (auto-reloading) timers
+* Fast and slow clock selection
+* 1ms accuracy when clocked by a **slow** clock
+* Supports one-shot - and continuos (auto-reloading) timers
 * User-provided callback on every timer expiration (with optional input parameter)
 
 ## Basic usage
-```
-```
+Use **slow** timer for longer time periods (up to 64s). Use **fast** clock for more granularity (~150us)
 
 ### Initialize RTC Counter
 ```
