@@ -1,3 +1,3 @@
-## This example illustrates stable 5ms timer period by triggering a pin. Uses **trueIRQ** mode bypassing loop().
+This example creates a 5ms timer to trigger a pin from a callback. Uses **trueIRQ** mode bypassing loop().
 
 ![5ms period timer accuracy](5ms.png)
