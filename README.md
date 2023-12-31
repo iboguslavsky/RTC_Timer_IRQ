@@ -1,4 +1,4 @@
-# Hardware interrupt-based Timer library for AVR DA/DB/DD + tinyAVR® 1-series and 0-series MCUs
+# rtctimer
 Unlinke other common timer libraries, this one doesn't have a limitation on the number of available timers. The number of timers is only limited by the amount of the available RAM. See [100_Timers](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md) for an example running on 2Kb RAM MCU.
 
 Since timers are hardware-based and interrupt-driven, it allows for accurate triggering of timers - independently of any blocking code in the app. See [accuracy](https://github.com/iboguslavsky/RTC_Timer_IRQ/tree/main/examples/accuracy) example.
