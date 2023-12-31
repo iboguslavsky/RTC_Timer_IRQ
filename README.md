@@ -1,22 +1,28 @@
 # rtctimer
-Unlinke other common timer libraries, this one doesn't have a limitation on the number of available timers. The number of timers is only limited by the amount of the available RAM. See [100_Timers](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md) for an example running on 2Kb RAM MCU.
 
-Since timers are hardware-based and interrupt-driven, it allows for accurate triggering of timers - independently of any blocking code in the app. See [accuracy](https://github.com/iboguslavsky/RTC_Timer_IRQ/tree/main/examples/accuracy) example.
+## Why Yet Annother timer library?
+* Uses hardware RTC counter as timing source
+* Interrupt driven, accuracy not affected by blocking code
+* "Unlimited" number of timers (limited by available RAM only) - [100 simultaneous timers](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md) example
+
+## Sample use
+```
+```
 
 ## Features
-This library makes use of the [RTC peripheral](https://onlinedocs.microchip.com/oxy/GUID-8CE4FE13-3B15-43FE-A86C-FC8177202CD3-en-US-6/GUID-5EFC8FBF-DD40-43CB-898A-D0EAD386D90D.html) 
+This library makes use of the [RTC peripheral](https://onlinedocs.microchip.com/oxy/GUID-8CE4FE13-3B15-43FE-A86C-FC8177202CD3-en-US-6/GUID-5EFC8FBF-DD40-43CB-898A-D0EAD386D90D.html), available on newer AVR parts, like *DA/DB/DD* series, as well as *tinyAVR® 1-series* and *0-series* parts. 
 
-available on newer AVR parts, like *DA/DB/DD* series, as well as *tinyAVR® 1-series* and *0-series* parts. This allows for:
-- Preserving commonly used TCA/TCB/TCD timers for other tasks
-- Exceptionally low power consumption (~800 nA when running from internal 32KHz oscillator)
-- 1ms accuracy (when clocked by 1.024KHz clock derived from from OSC32K)
-
-The library allows for selection of fast (32KHz) and slow (1.024Khz) clock. When longer timer periods are needed, use slow clock option (up to ~64s timer period). When more accuracy is required, use the fast clock (~30ms timer resolution).
-The library provides support for continuos (auto-reloading) and one-shot timers. 
-
-Upon the expiration, the timer will invoke a user-provided callback function. There is an optional input parameter of arbitrary type, that can be provided to the callback. See code examples for the input parameter use, including how to dereference the input parameter.
+* Preserves other commonly used hardware timers (TCA/TCB/TCD) for other tasks
+* Adds very little to power consumption (~800 nA when running from internal 32KHz oscillator)
+* 1ms accuracy (when clocked by 1.024KHz clock derived from from OSC32K)
+* 64s max timer period (**slow** clock)
+* Supports one-shot - and ccontinuos (auto-reloading) timers
+* User-provided callback on every timer expiration (with optional input parameter)
 
 ## Basic usage
+```
+```
+
 ### Initialize RTC Counter
 ```
 Timer::init(fastCLock, trueIRQ, Serial);
