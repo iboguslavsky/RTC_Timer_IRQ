@@ -20,7 +20,7 @@
   "license": "MIT",
   "homepage": "https://github.com/iboguslavsky",
   "dependencies": {
-    "mike-matera/ArduinoSTL": "~1.3.3"
+    "ciband/avr_stl": "~1.2.3"
   },
   "frameworks": "arduino",
   "platforms": "avr"
