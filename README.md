@@ -1,6 +1,6 @@
 # rtctimer
 
-## Why Yet Annother timer library?
+## Yet Another Timer Library?
 * Uses hardware RTC counter as timing source
 * Interrupt driven, accuracy not affected by blocking code
 * "Unlimited" number of timers (limited by available RAM only) - [100 simultaneous timers](https://github.com/iboguslavsky/RTC_Timer_IRQ/edit/main/README.md) example
