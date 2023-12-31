@@ -59,6 +59,6 @@ The library is using CMP mode of the RTC timer to dive individual timers. Snce R
 
 For that same reason, when starting timers in a rapid succession, allow for 5 ticks (5ms for slow clock) of delay between each __timerStart()__ run.
 
-License
+## License
 
 Copyright (c) 2023 Igor Boguslavsky - MIT License
