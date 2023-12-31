@@ -38,7 +38,7 @@ This library makes use of the [RTC peripheral](https://onlinedocs.microchip.com/
 * User-provided callback on every timer expiration (with optional input parameter)
 
 ## Basic usage
-Use **slow** timer for longer time periods (up to 64s). Use **fast** clock for more granularity (~150us)
+Use **slow** clock for longer time periods (up to 64s). Use **fast** clock for better granularity (~150us)
 
 ### Initialize RTC Counter
 ```
