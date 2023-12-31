@@ -1,4 +1,4 @@
-### Example of a large number (100) timers
+### Example of a large number (100) of timers
 
 * All timers run concurrently
 * Timer class objects are dynamically allocated during run time
