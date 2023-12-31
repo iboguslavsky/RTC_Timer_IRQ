@@ -1,0 +1,27 @@
+{
+  "name": "RtcTimer",
+  "version": "1.0.0",
+  "description": "Interrupt-based Arduino timer library for AVR DA/DB/DD + tinyAVR® 1-series and 0-series MCUs",
+  "keywords": "Arduino, Timer, Library, Interrupt, AVR",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/iboguslavsky/RTC_Timer_IRQ"
+  },
+  "authors":
+  [
+    {
+      "name": "Igor Boguslavsky",
+      "email": "iboguslavsky@gmail.com",
+      "url": "https://github.com/iboguslavsky",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/iboguslavsky",
+  "dependencies": {
+    "mike-matera/ArduinoSTL": "~1.3.3"
+  },
+  "frameworks": "arduino",
+  "platforms": "avr"
+}
