@@ -1,4 +1,4 @@
-# rtctimer
+# RtcTimerIRQ
 
 ## Yet Another Arduino Timer Library?
 * Uses hardware RTC counter as timing source
