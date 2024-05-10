@@ -78,7 +78,7 @@ Timer::timerLoop()
 This will check for expired timers and run corresponsding callback functions defined during timer's instantiation. Keep in mind that if loop() gets blocked, your timer will be inaccurate. If you need to keep the accuracy, use *trueIRQ* mode in _Timer::init()_.
 
 ## Limitations
-The library is using CMP mode of the RTC timer to dive individual timers. Snce RTC domain clock is asynchronous to the main clock, it takes up to 3 RTC lcock cycles to syncronize CMP register changes. Because of this limitation, timer granularity is forced in code to a minimum of 5 timer ticks. When the *slow* clock timer is used, this results in ~5ms timer period granularity. The library will automatically round up the timer period to the nearest 5ms boundary (ie, setting timer to 22ms period will result in a 25ms actual period).
+The library is using CMP mode of the RTC timer to dive individual timers. Since RTC domain clock is asynchronous to the main clock, it takes up to 3 RTC lcock cycles to syncronize CMP register changes. Because of this limitation, timer granularity is forced in code to a minimum of 5 timer ticks. When the *slow* clock timer is used, this results in ~5ms timer period granularity. The library will automatically round up the timer period to the nearest 5ms boundary (ie, setting timer to 22ms period will result in a 25ms actual period).
 
 For that same reason, when starting timers in a rapid succession, allow for 5 ticks (5ms for slow clock) of delay between each __timerStart()__ run.
 
